@@ -1,25 +1,26 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Apr 26 16:36:49 2020
 
-@author: victor
-"""
+'''
+Práctica TEII - Bloque 4 - Código de la sesión 3 de prácticas
+'''
+
 import sys
-import string
+import time
 import numpy as np
-
+import matplotlib.pyplot as plt
+numeros = []
+# Código main:
 def main():   
     # Control de argumentos de línea de comandos:
-    if len(sys.argv) != 3:
-        print("Uso: {} fichname number".format(sys.argv[0]))
+    if len(sys.argv) != 2:
+        print("Uso: {} in out1 out".format(sys.argv[0]))
         sys.exit(0)
-    nombre = sys.argv[1]
-    numeros= int(sys.argv[2])
-    fichero = open(nombre,'w')
-    for i in range(0,numeros):
-        num = np.random.randint(99999)
-        fichero.write(str(num) + '\n')
-    fichero.close()
+ficheroEntrada = sys.argv[1]
+with open(ficheroEntrada,'r') as reader:
+    for line in reader:
+        numeros.append(int(line))
+
+ 
 if __name__ == '__main__':
     main()
