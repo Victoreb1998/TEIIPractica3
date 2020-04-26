@@ -13,10 +13,11 @@ numeros = []
 # Código main:
 def main():   
     # Control de argumentos de línea de comandos:
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 3:
         print("Uso: {} in out1 out".format(sys.argv[0]))
         sys.exit(0)
 ficheroEntrada = sys.argv[1]
+ficheroSalida = sys.argv[2]
 with open(ficheroEntrada,'r') as reader:
     for line in reader:
         numeros.append(int(line))
@@ -26,6 +27,9 @@ t1 = time.time_ns()
 t2 = time.time_ns()
 sinRepeticiones2=dict.fromkeys(numeros).keys()
 t3 = time.time_ns()
+fichero = open(ficheroSalida,'w')
+for numero in sinRepeticiones1:
+        fichero.write(str(numero) + '\n')
 
  
 if __name__ == '__main__':
