@@ -2,24 +2,27 @@
 #include <stdlib.h>
 #include "Listas.h"
 
-// Función que multiplica todos los elementos de un vector «vin» de tamaño
-// «size» por un factor de escala «scale», dejando el resultado en el vector
-// «vout».
-int* Listas(int * lista, const int size)
+int compare_ints(const void* a, const void* b)
 {
+	
+	return (*(int *)a - *(int *)b);
 
-	int aux = size;
-    for(int i=0;i<aux;i++) {
-        for(int j=i+1; j < aux; j++){
-			if(lista[i] == lista[j]){
-				for(int k=j; k<aux; k++){
-					lista[k]=lista[k+1];
-				}
-				aux--;
-				j--;
-			}
-		}
+}
+
+int* Listas(int * lista, const int size,int * longitudFinal)
+{
+	
+	int temp[size];
+	int j=0;
+	qsort(lista,size,sizeof(int),compare_ints);
+	for(int i=0; i<size-1;i++)
+		if(lista[i] != lista[i+1])
+			temp[j++]=lista[i];
+	temp[j++] = lista[size-1];
+	int * salida = (int*)malloc(j*sizeof(int));
+	for(int i=0;i<j;i++) {
+        salida[i] = temp[i];
     }
-    
-    return lista;
+    longitudFinal[0] = j;
+    return salida;
 }
