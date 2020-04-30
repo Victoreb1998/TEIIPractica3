@@ -50,7 +50,9 @@ except:
     
 try:
     ficheroSalida = sys.argv[2]
-    comprobacion = ficheroSalida.split()
+    #comprobamos que el fichero no tenga ninguna extension, si la tiene
+    #pedimos que el usuario meta un nombre simple
+    comprobacion = ficheroSalida.split(".")
     if (len(comprobacion)!=1):
         raise ValueError()
 except:
