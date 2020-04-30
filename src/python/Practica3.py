@@ -35,13 +35,37 @@ def main():
     if len(sys.argv) != 4:
         print("Uso: {} in out1 out".format(sys.argv[0]))
         sys.exit(0)
-ficheroEntrada = sys.argv[1]
-ficheroSalida = sys.argv[2]
-ficheroPDF = sys.argv[3]
+ficheroEntrada = None
+ficheroSalida = None
+ficheroPDF = None
 
-with open(ficheroEntrada,'r') as reader:
-    for line in reader:
-        numeros.append(int(line))
+try:
+    ficheroPDF = sys.argv[3]
+    comprobacion = ficheroPDF.split(".")
+    if (len(comprobacion)!=2 or comprobacion[1] != "pdf"):
+        raise ValueError()
+except:
+    print("Debe de introducir un fichero pdf")
+    sys.exit(-1)
+    
+try:
+    ficheroSalida = sys.argv[2]
+    comprobacion = ficheroSalida.split()
+    if (len(comprobacion)!=1):
+        raise ValueError()
+except:
+    print("Debe de introducir simplemente un nombre")
+    sys.exit(-1)
+try:
+    ficheroEntrada = sys.argv[1]
+    with open(ficheroEntrada,'r') as reader:
+        for line in reader:
+            numeros.append(int(line))
+    if (len(numeros)==0):
+        raise ValueError()
+except:
+    print("El fichero de entrada debe existir")
+    sys.exit(-1)
         
 sinRepeticiones1=[]
 
@@ -70,7 +94,7 @@ while(numerosProcesar <= 200000):
 t = np.linspace(0,200000,2000) 
    
 plot1 = plot_values(numerosaux, tiemposSet,tiemposDic,tiemposC,width=0.5)
-plot1.savefig(str(ficheroPDF)+'.pdf',bbox_inches='tight')
+plot1.savefig(ficheroPDF,bbox_inches='tight')
 
 fichero = open(ficheroSalida,'w')
 for numero in sinRepeticiones1:
