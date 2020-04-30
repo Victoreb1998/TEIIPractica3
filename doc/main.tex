@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Práctica entregable de los bloques 3 y 4: 
+\newline LATEX, git, python, Numpy, Matplotlib, gdb y profiling}
+\author{ Victor Espín Belmonte y Jaime Ortiz Aragón }
+\date{April 2020}
+
+\begin{document}
+
+\maketitle
+
+\section{Planteamiento del problema}
+La resolución de los Bloques III y IV de la asignatura constan de desarrollar un programa propuesto en Phyton y C, ayudándonos de las estructuras que se nos han proporcionado en las presentaciones de teoría \textit{LatexTeoria.pdf, GitTeoria.pdf, PythonTeoria.pdf y teii-bloque4.pdf} así como en las estructuras del código en \textit{bloque4-codigo.tgz}. La implementación del código la hemos ido recopilando en la aplicación \textbf{github.com} con el fin de haber podido mostrar nuestro progreso, el cual hemos ido realizando a la par por videollamadas de \textbf{Skype}.
+\newline\newline
+En concreto, el problema a resolver en esta tarea consistía en dada una lista de tamaño variable de entrada, controlar los elementos repetidos que contiene, en nuestro caso \textit{int}, para proporcionar como salida una lista sin repetidos.
+\newline
+Estos valores pueden variar en el intervalo \textbf{[0-99999]} y la longitud de la lista puede ser de hasta \textbf{200000} valores, siendo el valor máximo el que se establece como referencia en el enunciado de la tarea.
+
+
+\section{Resolución del problema}
+\subsection{Generación aleatoria de números}
+El primer paso que realizamos para la confección del problema consistió en comprobar los argumentos que debía recibir el programa : los argumentos de entrada para generar el fichero con los números de la lista completa son el nombre del fichero y el número de enteros que contiene.
+
+generar en \textit{Phyton} el fichero con la lista de números aleatorios.
+\newline
+Para esto, hicimos uso de la librería \textit{Numpy}, que nos permite mediante la función \textit{np.random.randint(valormax)} generar un número en el intervalo \textbf{[0-valormax]}. Para que esto generara la lista, simplemente debíamos realizar dicha operación para cada elemento, con su escritura en el fichero pasado como parámetro.
+\newline
+Este código se encuentra en el fichero \textit{Fichero.py} en la carpeta de \textit{Phyton}.
+\newline
+En este primer paso también realizamos la lectura del fichero que contenía los valores con la función \textit{open(ficheroEntrada,'r')}.
+\subsection{Programa principal en \textit{Phyton}}
+El programa principal, que se encuentra en el fichero \textit{Practica3.py}, recibe como parámetros el nombre del fichero que se generó en el apartado \textbf{2.1}, el fichero en el que va a escribir la lista de números sin repeticiones y el fichero pdf en el que se va a guardar la gráfica que se nos pide representar.
+\newline
+Se nos pide que resolvamos el problema de dos formas distintas y tras estudiar órdenes de complejidad, nos decantamos por utilizar conjuntos y diccionarios. Ambos presentan un \textbf{O(n)} en sus operaciones para eliminar los repetidos. Por definición, un conjunto es una colección de valores que no presenta repetidos, por lo que si pasamos una lista a un conjunto, en este podremos encontrar todos los valores de la lista eliminando los repetidos. Esto lo realizamos en la línea \textit{list(set(aux))}, que transforma la lista \textit{aux} en un conjunto y posteriormente en una lista de nuevo, con los valores del conjunto. 
+\newline
+Por otra parte, en Python, un diccionario es una colección no-ordenada de valores que son accedidos a traves de una clave. Estos tipos pueden ser listas, cadenas, tuplas, otros diccionarios, objetos, etc. Como es de esperar, una tupla no puede estar repetida, ya que cada clave hace referencia a una tupla del diccionario. Para conseguir pasar una lista con elementos repetidos a un diccionario solo debemos usar \textit{dict.fromkeys(aux).keys()}.
+\newline \newline
+Otra solución que podríamos haber adoptado son el ordenar la lista e ir buscando si el elemento \textit{n} es igual al \textit{n+1} para ir eliminando. Otra más podría haber sido tener un array de \textbf{0-valormax}, y cunado vayamos encontrando un valor, marcarlo como encontrado en el array.
+\newline
+Como cabe de esperar, el orden de magnitud es mucho mayor al adoptado en nuestras soluciones.
+\subsection{Programa principal en C}
+Para pasar el código de \textit{Phyton} a \textit{C} nos hemos basado en el fichero que se nos ofreció \textit{mult.py}.
+\newline
+Dado que se nos pide que la reserva de memoria se haga en \textit{Python}, debemos conseguir hacer desde aquí una llamada al código \textit{C}, que se encontrará en la carpeta C correspondiente.
+\newline
+En nuestro fichero \textit{Listas.py} utilizamos la biblioteca de \textit{Ctypes}
+\subsection{Comparación de tiempos de operaciones}
+
+\bibliography{bibliografia}
+\end{document}
