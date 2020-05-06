@@ -57,23 +57,27 @@ try:
         raise ValueError()
 except:
     print("Debe de introducir simplemente un nombre")
-    sys.exit(-1)
+    sys.exit(-2)
 try:
     ficheroEntrada = sys.argv[1]
     with open(ficheroEntrada,'r') as reader:
         for line in reader:
             numeros.append(int(line))
-    if (len(numeros)==0):
+    if (len(numeros)!=200000):
         raise ValueError()
 except:
     print("El fichero de entrada debe existir")
-    sys.exit(-1)
+    sys.exit(-3)
         
 sinRepeticiones1=[]
 
 
 while(numerosProcesar <= 200000):
+	#nos guardamos la cantidad de números con la que trabajamos
+	#para luego mostrarla en la gráfica
     numerosaux.append(numerosProcesar)
+    #cogemos los numerosProcesar elementos de la lista original
+    #Para trabajar con ellos
     aux=numeros[0:numerosProcesar]
     
     t0 = t.time_ns()
@@ -92,8 +96,6 @@ while(numerosProcesar <= 200000):
     tiemposSet.append(t_exec1)
     tiemposDic.append(t_exec2)
     numerosProcesar+=2000
-    
-t = np.linspace(0,200000,2000) 
    
 plot1 = plot_values(numerosaux, tiemposSet,tiemposDic,tiemposC,width=0.5)
 plot1.savefig(ficheroPDF,bbox_inches='tight')
