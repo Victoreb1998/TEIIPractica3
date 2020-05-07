@@ -6,7 +6,6 @@ Created on Sun Apr 26 16:36:49 2020
 @author: victor
 """
 import sys
-import string
 import numpy as np
 
 def main():   
